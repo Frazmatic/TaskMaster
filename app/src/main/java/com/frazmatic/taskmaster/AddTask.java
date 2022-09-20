@@ -5,22 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class AddTask extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_task);
     }
 
     public void addTask(View view){
-        Intent intent = new Intent(this, AddTask.class);
-        startActivity(intent);
+        TextView submitted = findViewById(R.id.text_submitted_label);
+        submitted.setVisibility(View.VISIBLE);
     }
 
-    public void allTasks(View view){
-        Intent intent = new Intent(this, AllTasks.class);
-        startActivity(intent);
-    }
 }
