@@ -2,7 +2,6 @@ package com.frazmatic.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ public class AddTask extends AppCompatActivity {
     }
 
     public void addTask(View view){
-        TextView submitted = findViewById(R.id.text_submitted_label);
+        TextView submitted = findViewById(R.id.textSubmittedLabel);
         submitted.setVisibility(View.VISIBLE);
     }
 

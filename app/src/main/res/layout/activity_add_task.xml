@@ -7,15 +7,16 @@
     tools:context=".AddTask">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewAddTaskTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/add_task_page_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
@@ -24,17 +25,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_add_task"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_input_task_description"
+            android:id="@+id/textInputTaskDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/task_description_hint" />
+            android:hint="@string/task_description_hint"
+            android:textColorHint="#616161" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,29 +50,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddTaskTitle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_input_task_title"
+            android:id="@+id/textInputTaskTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/task_title_hint" />
+            android:hint="@string/task_title_hint"
+            android:textColorHint="#616161" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button_add_task"
+        android:id="@+id/buttonAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:onClick="addTask"
         android:text="@string/button_submit_add_task"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSubmittedCount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewSubmittedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -79,16 +82,16 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_add_task" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddTask" />
 
     <TextView
-        android:id="@+id/text_submitted_label"
+        android:id="@+id/textSubmittedLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/task_sumbitted_label"
+        android:text="@string/task_submitted_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:visibility="invisible"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button_add_task"
-        app:layout_constraintStart_toEndOf="@+id/button_add_task" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAddTask"
+        app:layout_constraintStart_toEndOf="@+id/buttonAddTask" />
 </androidx.constraintlayout.widget.ConstraintLayout>
