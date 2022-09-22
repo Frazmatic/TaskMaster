@@ -1,4 +1,4 @@
-package com.frazmatic.taskmaster;
+package com.frazmatic.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.frazmatic.taskmaster.R;
 
 public class Settings extends AppCompatActivity {
     private SharedPreferences settings;
