@@ -1,8 +1,10 @@
-package com.frazmatic.taskmaster;
+package com.frazmatic.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.frazmatic.taskmaster.R;
 
 public class AllTasks extends AppCompatActivity {
 
