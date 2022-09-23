@@ -2,7 +2,35 @@
 
 An app for tracking tasks and their completion.
 
+## 22 September 2022
+### Database Persistence
+- Added Room DB dependencies
+- Updated Task class to Entity
+- Moved TaskState enum to subclass of Task
+  - implemented string conversion methods for Enum
+- Built Data Access Object (DAO) class for Task
+- Built Database (Room) class with Task entity & TaskDAO
+- Added Date created field to Task
+- Added Date created display to Adapter & Layout for RecyclerView
+- Add DB to MainActivity and Load it to the RecyclerView
+  - Method to setup database called in onCreate
+  - Methods to reset list used in RecyclerView called in onResume
+- DB setup for AddTask Activity
+  - Tasks Added Count added; 0 on create; increments with adds
+    - Updates tasks added count display on add 
+  - Setup method to add tasks to DB
+  - Added Toast for successful submission
+  - Ensured empty title task can't be added
+- Updated TaskAdapter and TaskDetails to carry over title, description, date, and state.
+- Added Espresso Tests (with Recorder)
+
+
+![Home Page Version3](./screenshots/homepagev3.jpg)
+![Add Task Screenshot](./screenshots/addtask.jpg)
+![Task Details Version 3](./screenshots/task-detailsV3.jpg)
+
 ## 21 September 2022
+### RecyclerView
 - Created Task Class
 - Placed RecyclerView Component in Main Activity
 - Created methods in Main Activity Java to set RecyclerView layout & adapter, and load with sample Task data
