@@ -2,7 +2,46 @@
 
 An app for tracking tasks and their completion.
 
+## 26 September 2022
+### Espresso Testing
+- Recorded Tests for updating username with Settings Activity
+  - Asserts that name is saved and show up upon returning to Main Activity
+- Recorded Tests for Add Task Activity
+  - Asserts that tasks added counter is updated and visible
+  - Asserts that tasks with their name, description, and state are visible on Main Page in RecyclerView
+- Recorded Tests for Task Details
+  - Asserts that tasks in RecyclerView can be clicked/tapped and loads TaskDetails Activity
+  - Asserts that name, description, and state of the clicked/tapped task are visible in TaskDetails
+- Did not change UIs today, screenshots remain identical.
+
+## 22 September 2022
+### Database Persistence
+- Added Room DB dependencies
+- Updated Task class to Entity
+- Moved TaskState enum to subclass of Task
+  - implemented string conversion methods for Enum
+- Built Data Access Object (DAO) class for Task
+- Built Database (Room) class with Task entity & TaskDAO
+- Added Date created field to Task
+- Added Date created display to Adapter & Layout for RecyclerView
+- Add DB to MainActivity and Load it to the RecyclerView
+  - Method to setup database called in onCreate
+  - Methods to reset list used in RecyclerView called in onResume
+- DB setup for AddTask Activity
+  - Tasks Added Count added; 0 on create; increments with adds
+    - Updates tasks added count display on add 
+  - Setup method to add tasks to DB
+  - Added Toast for successful submission
+  - Ensured empty title task can't be added
+- Updated TaskAdapter and TaskDetails to carry over title, description, date, and state.
+- Added Espresso Tests (with Recorder)
+
+![Home Page Version3](./screenshots/homepagev3.jpg)
+![Add Task Screenshot](./screenshots/addtask.jpg)
+![Task Details Version 3](./screenshots/task-detailsV3.jpg)
+
 ## 21 September 2022
+### RecyclerView
 - Created Task Class
 - Placed RecyclerView Component in Main Activity
 - Created methods in Main Activity Java to set RecyclerView layout & adapter, and load with sample Task data

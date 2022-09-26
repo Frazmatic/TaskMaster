@@ -13,7 +13,7 @@ import com.frazmatic.taskmaster.R;
 
 public class Settings extends AppCompatActivity {
     private SharedPreferences settings;
-    public static String USERNAME_KEY = "userName";
+    public static final String USERNAME_KEY = "userName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

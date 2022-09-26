@@ -3,6 +3,7 @@ package com.frazmatic.taskmaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.frazmatic.taskmaster.R;
+import com.frazmatic.taskmaster.activities.database.TaskDatabase;
 import com.frazmatic.taskmaster.adapters.TaskAdapter;
 import com.frazmatic.taskmaster.models.Task;
 
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView mainTitle;
     private String username;
+    public static final String DATABASE_NAME = "task_db";
+    private TaskDatabase taskDB;
+    private List<Task> tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         updateUserName();
+        createTaskDatabase();
         recyclerSetup();
     }
 
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUserName();
+        tasks.clear();
+        tasks.addAll(taskDB.taskDao().findAll());
     }
 
     private void updateUserName(){
@@ -65,15 +73,16 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView taskRecycler = findViewById(R.id.recyclerTasks);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskRecycler.setLayoutManager(layoutManager);
-        TaskAdapter adapter = new TaskAdapter(getSampleTaskList(), this);
+        TaskAdapter adapter = new TaskAdapter(tasks, this);
         taskRecycler.setAdapter(adapter);
     }
 
-    private List<Task> getSampleTaskList(){
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("Book Dental Appointment", "ouch my tooth hurts"));
-        tasks.add(new Task("Debug this program", "this could take a while"));
-        tasks.add(new Task("Do Taxes", "OMG they're 6 months late"));
-        return tasks;
+    private void createTaskDatabase(){
+        taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, DATABASE_NAME)
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
+        tasks = taskDB.taskDao().findAll();
     }
+
 }

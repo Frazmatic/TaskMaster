@@ -2,10 +2,10 @@ package com.frazmatic.taskmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.frazmatic.taskmaster.R;
 import com.frazmatic.taskmaster.activities.TaskDetail;
 import com.frazmatic.taskmaster.models.Task;
-import com.frazmatic.taskmaster.models.TaskState;
 
 import java.util.List;
 
@@ -38,38 +37,28 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         TextView titleView = holder.itemView.findViewById(R.id.textViewTaskFragTitle);
         String title = tasks.get(position).getTitle();
-        titleView.setText("1. " + tasks.get(position).getTitle());
+        titleView.setText((position+1) + ". " + tasks.get(position).getTitle());
 
         TextView body = holder.itemView.findViewById(R.id.textViewTaskFragBody);
         String taskBody = tasks.get(position).getBody();
         body.setText(taskBody);
 
         TextView state = holder.itemView.findViewById(R.id.textViewTaskFragState);
-        state.setText(stateToString(tasks.get(position).getState()));
+        state.setText(tasks.get(position).getState().toString());
 
-        holder.itemView.setOnClickListener(view -> {taskDetails(title, taskBody);});
+        TextView dateCreated = holder.itemView.findViewById(R.id.textViewTaskFragDateCreated);
+        dateCreated.setText(tasks.get(position).getCreated().toString());
+
+        holder.itemView.setOnClickListener(view -> {taskDetails(tasks.get(position));});
     }
 
-    private void taskDetails(String title, String body){
+    private void taskDetails(Task task){
         Intent intent = new Intent(callingActivity, TaskDetail.class);
-        intent.putExtra("taskTitle", title);
-        intent.putExtra("taskBody", body);
+        intent.putExtra("title", task.getTitle());
+        intent.putExtra("body", task.getBody());
+        intent.putExtra("date", task.getCreated().toString());
+        intent.putExtra("state", task.getState().toString());
         callingActivity.startActivity(intent);
-    }
-
-    private String stateToString(TaskState state){
-        switch(state){
-            case NEW:
-                return "New";
-            case ASSIGNED:
-                return "Assigned";
-            case IN_PROGRESS:
-                return "In Progress";
-            case COMPLETE:
-                return "Complete";
-            default:
-                return "";
-        }
     }
 
     @Override
