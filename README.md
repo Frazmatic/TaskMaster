@@ -2,6 +2,18 @@
 
 An app for tracking tasks and their completion.
 
+## 26 September 2022
+### Espresso Testing
+- Recorded Tests for updating username with Settings Activity
+  - Asserts that name is saved and show up upon returning to Main Activity
+- Recorded Tests for Add Task Activity
+  - Asserts that tasks added counter is updated and visible
+  - Asserts that tasks with their name, description, and state are visible on Main Page in RecyclerView
+- Recorded Tests for Task Details
+  - Asserts that tasks in RecyclerView can be clicked/tapped and loads TaskDetails Activity
+  - Asserts that name, description, and state of the clicked/tapped task are visible in TaskDetails
+- Did not change UIs today, screenshots remain identical.
+
 ## 22 September 2022
 ### Database Persistence
 - Added Room DB dependencies
@@ -23,7 +35,6 @@ An app for tracking tasks and their completion.
   - Ensured empty title task can't be added
 - Updated TaskAdapter and TaskDetails to carry over title, description, date, and state.
 - Added Espresso Tests (with Recorder)
-
 
 ![Home Page Version3](./screenshots/homepagev3.jpg)
 ![Add Task Screenshot](./screenshots/addtask.jpg)
