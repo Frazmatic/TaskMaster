@@ -3,22 +3,18 @@ package com.frazmatic.taskmaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.frazmatic.taskmaster.R;
-import com.frazmatic.taskmaster.activities.database.TaskDatabase;
 import com.frazmatic.taskmaster.adapters.TaskAdapter;
 import com.frazmatic.taskmaster.models.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView mainTitle;
     private String username;
-    public static final String DATABASE_NAME = "task_db";
-    private TaskDatabase taskDB;
     private List<Task> tasks;
 
     @Override
@@ -36,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         updateUserName();
-        createTaskDatabase();
+        //createTaskDatabase();
         recyclerSetup();
     }
 
@@ -45,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         updateUserName();
         tasks.clear();
-        tasks.addAll(taskDB.taskDao().findAll());
+        //TO DO: Load Tasks from AWS Dynamo DB
+        //tasks.addAll(taskDB.taskDao().findAll());
     }
 
     private void updateUserName(){
@@ -78,11 +73,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createTaskDatabase(){
-        taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
-        tasks = taskDB.taskDao().findAll();
+        //taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, DATABASE_NAME)
+                //.allowMainThreadQueries()
+                //.fallbackToDestructiveMigration()
+                //.build();
+        //TO DO: Load tasks list from AWS DynamoDB
+        //tasks = taskDB.taskDao().findAll();
     }
 
 }

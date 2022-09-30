@@ -1,15 +1,11 @@
 package com.frazmatic.taskmaster.models;
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
 public class Task {
-    @PrimaryKey(autoGenerate = true)
-    public Long id;
+
     private String title;
     private String body;
     private TaskState state;
@@ -44,14 +40,6 @@ public class Task {
 
     public void setState(TaskState state) {
         this.state = state;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getCreated() {

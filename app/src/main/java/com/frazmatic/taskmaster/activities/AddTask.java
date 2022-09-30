@@ -1,7 +1,7 @@
 package com.frazmatic.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.frazmatic.taskmaster.R;
-import com.frazmatic.taskmaster.activities.database.TaskDatabase;
 import com.frazmatic.taskmaster.models.Task;
 
 import java.util.List;
 
 public class AddTask extends AppCompatActivity {
-    private TaskDatabase taskDB;
-    List<Task> tasks;
     private int tasksAdded;
 
     @Override
@@ -33,8 +30,8 @@ public class AddTask extends AppCompatActivity {
         EditText description = findViewById(R.id.textInputTaskDescription);
         if(title.getText().length() > 1){
             Task newTask = new Task(title.getText().toString(), description.getText().toString());
-
-            taskDB.taskDao().insertTask(newTask);
+            //TO DO - Add to AWS DynamoDB
+            //taskDB.taskDao().insertTask(newTask);
 
             tasksAdded++;
             TextView taskAddedCount = findViewById(R.id.textViewSubmittedCount);
@@ -47,11 +44,10 @@ public class AddTask extends AppCompatActivity {
     }
 
     private void createTaskDatabase(){
-        taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, MainActivity.DATABASE_NAME)
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
-        tasks = taskDB.taskDao().findAll();
+        //taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, MainActivity.DATABASE_NAME)
+                //.allowMainThreadQueries()
+                //.fallbackToDestructiveMigration()
+                //.build();
     }
 
 }
