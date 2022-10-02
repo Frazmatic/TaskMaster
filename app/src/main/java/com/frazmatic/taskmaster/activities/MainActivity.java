@@ -3,32 +3,29 @@ package com.frazmatic.taskmaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.frazmatic.taskmaster.R;
-import com.frazmatic.taskmaster.activities.database.TaskDatabase;
 import com.frazmatic.taskmaster.adapters.TaskAdapter;
-import com.frazmatic.taskmaster.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static final String main_tag ="Main Activity";
     private SharedPreferences settings;
-    private TextView mainTitle;
-    private String username;
-    public static final String DATABASE_NAME = "task_db";
-    private TaskDatabase taskDB;
     private List<Task> tasks;
+    private TaskAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         updateUserName();
-        createTaskDatabase();
+        tasks = new ArrayList<>();
         recyclerSetup();
     }
 
@@ -44,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUserName();
-        tasks.clear();
-        tasks.addAll(taskDB.taskDao().findAll());
+        loadTasksFromAmplify();
     }
 
     private void updateUserName(){
-        username = settings.getString(Settings.USERNAME_KEY, "No User Name");
-        mainTitle = (TextView)findViewById(R.id.textMainTitle);
-        mainTitle.setText(username + "'s Tasks:");
+        String username = settings.getString(Settings.USERNAME_KEY, "No User Name");
+        TextView mainTitle = findViewById(R.id.textMainTitle);
+        String title = username + "'s Tasks:";
+        mainTitle.setText(title);
     }
 
     public void addTask(View view){
@@ -73,16 +70,24 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView taskRecycler = findViewById(R.id.recyclerTasks);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskRecycler.setLayoutManager(layoutManager);
-        TaskAdapter adapter = new TaskAdapter(tasks, this);
+        adapter = new TaskAdapter(tasks, this);
         taskRecycler.setAdapter(adapter);
     }
 
-    private void createTaskDatabase(){
-        taskDB = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
-        tasks = taskDB.taskDao().findAll();
+    private void loadTasksFromAmplify(){
+        Amplify.API.query(
+            ModelQuery.list(Task.class),
+            success -> {
+                Log.i(main_tag, "Loaded Tasks from Amplify");
+                tasks.clear();
+                for (Task t : success.getData()){
+                    tasks.add(t);
+                }
+                runOnUiThread(() ->
+                        adapter.notifyDataSetChanged()
+                );
+            },
+            failure -> Log.i(main_tag,"Failed to Load task from Amplify: " + failure.getMessage())
+        );
     }
-
 }

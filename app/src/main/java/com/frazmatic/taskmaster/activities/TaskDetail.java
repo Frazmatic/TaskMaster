@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.frazmatic.taskmaster.R;
-import com.frazmatic.taskmaster.models.Task;
 
 public class TaskDetail extends AppCompatActivity {
 
