@@ -2,6 +2,22 @@
 
 An app for tracking tasks and their completion.
 
+## 1 October 2022
+## DynamoDB & GraphQL
+- Removed Rooms local DB classes and references
+- Created Task & TaskState models in schema.graphql
+- Updated Classes to work with Amplify generated models:
+  - AddTask Activity
+  - Main Activity
+  - RecyclerView Adapter (TaskAdapter)
+- Updated Classes to Load to/from Amplify DynamoDB:
+  - AddTask
+  - MainActivity
+- Figured out how to get corrected String format for date-time object returned from DB via Amplify
+
+[AWS loaded screenshot](./screenshots/TasksLoadedFromAWS.jpg)
+[Add Task Uploaded to DynamoDB Screenshot](./screenshots/DynamoDb.jpg)
+
 ## 29 September 2022
 ### AWS
 - Set up AWS account w/ admin user
