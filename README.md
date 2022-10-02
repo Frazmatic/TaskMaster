@@ -15,8 +15,8 @@ An app for tracking tasks and their completion.
   - MainActivity
 - Figured out how to get corrected String format for date-time object returned from DB via Amplify
 
-[AWS loaded screenshot](./screenshots/TasksLoadedFromAWS.jpg)
-[Add Task Uploaded to DynamoDB Screenshot](./screenshots/DynamoDb.jpg)
+![AWS loaded screenshot](./screenshots/TasksLoadedFromAWS.jpg)
+![Add Task Uploaded to DynamoDB Screenshot](./screenshots/DynamoDb.jpg)
 
 ## 29 September 2022
 ### AWS
@@ -24,7 +24,7 @@ An app for tracking tasks and their completion.
 - Configured & initialized Amplify in root directory
 - Setup initial backend API with sample data schema
 
-[AWS GraphQL Initial Setup](/screenshots/GraphQLApi.jpg)
+![AWS GraphQL Initial Setup](/screenshots/GraphQLApi.jpg)
 
 ## 26 September 2022
 ### Espresso Testing
