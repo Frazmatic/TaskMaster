@@ -24,10 +24,15 @@ public class TaskDetail extends AppCompatActivity {
         detailsText.setText(intent.getStringExtra("body"));
 
         TextView date = findViewById(R.id.textViewDetailsDate);
-        date.setText("Created On: " + intent.getStringExtra("date"));
+        String dateText = "Created On" + intent.getStringExtra("date");
+        date.setText(dateText);
 
         TextView state = findViewById(R.id.textViewDetailsState);
         state.setText(intent.getStringExtra("state"));
+
+        TextView team = findViewById(R.id.textViewDetailsTeam);
+        String teamText = "Team: " + intent.getStringExtra("team");
+        team.setText(teamText);
 
     }
 }

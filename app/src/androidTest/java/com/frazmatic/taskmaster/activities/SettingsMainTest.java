@@ -42,7 +42,7 @@ public class SettingsMainTest {
     @Test
     public void usernameHomepageTest() {
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.buttonSettings), withText("Settings"),
+                allOf(withId(R.id.buttonSettingsActivity), withText("Settings"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

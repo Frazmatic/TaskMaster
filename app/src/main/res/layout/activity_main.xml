@@ -19,47 +19,44 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonAddTask"
+        android:id="@+id/buttonAddTaskActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="24dp"
-        android:onClick="addTask"
         android:text="@string/button_add_task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAllTasks"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAllTasksActivity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonAllTasks"
+        android:id="@+id/buttonAllTasksActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="allTasks"
         android:text="@string/button_all_tasks"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAddTask"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAddTaskActivity"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSettingsActivity"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonAddTask" />
+        app:layout_constraintStart_toEndOf="@+id/buttonAddTaskActivity" />
 
     <Button
-        android:id="@+id/buttonSettings"
+        android:id="@+id/buttonSettingsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:onClick="settings"
         android:text="@string/button_settings_main"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAllTasks"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAllTasksActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonAllTasks" />
+        app:layout_constraintStart_toEndOf="@+id/buttonAllTasksActivity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTasks"
         android:layout_width="348dp"
         android:layout_height="538dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAllTasks"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAllTasksActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"

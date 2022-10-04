@@ -2,6 +2,21 @@
 
 An app for tracking tasks and their completion.
 
+## 4 October 2022
+## Teams
+- Added Team entity with relationship to Task (Team has many tasks)
+- Configured Add Task to load Teams from DynamoDB
+- Added Spinner to Choose Team
+- Team now saved to Task with Add task
+- Adjusted Settings Page to choose Team
+- Home page only shows user team's tasks
+  - Shows all tasks if no team selected
+
+![Homepage](./screenshots/homepageV4a.jpg)
+![Homepage 2](./screenshots/homepageV4b.jpg)
+![Add Task](./screenshots/addtaskV2.jpg)
+![Settings](./)
+
 ## 1 October 2022
 ## DynamoDB & GraphQL
 - Removed Rooms local DB classes and references
@@ -15,8 +30,8 @@ An app for tracking tasks and their completion.
   - MainActivity
 - Figured out how to get corrected String format for date-time object returned from DB via Amplify
 
-[AWS loaded screenshot](./screenshots/TasksLoadedFromAWS.jpg)
-[Add Task Uploaded to DynamoDB Screenshot](./screenshots/DynamoDb.jpg)
+![AWS loaded screenshot](./screenshots/TasksLoadedFromAWS.jpg)
+![Add Task Uploaded to DynamoDB Screenshot](./screenshots/DynamoDb.jpg)
 
 ## 29 September 2022
 ### AWS
@@ -24,7 +39,7 @@ An app for tracking tasks and their completion.
 - Configured & initialized Amplify in root directory
 - Setup initial backend API with sample data schema
 
-[AWS GraphQL Initial Setup](/screenshots/GraphQLApi.jpg)
+![AWS GraphQL Initial Setup](/screenshots/GraphQLApi.jpg)
 
 ## 26 September 2022
 ### Espresso Testing
