@@ -2,24 +2,18 @@ package com.frazmatic.taskmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.frazmatic.taskmaster.R;
 import com.frazmatic.taskmaster.activities.TaskDetail;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
@@ -54,6 +48,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         TextView dateCreated = holder.itemView.findViewById(R.id.textViewTaskFragDateCreated);
         dateCreated.setText(tasks.get(position).getCreated().toDate().toString());
 
+        TextView team = holder.itemView.findViewById(R.id.textViewTaskFragTeam);
+        String teamText = "Team: " + tasks.get(position).getTeam().getName();
+        team.setText(teamText);
+
         holder.itemView.setOnClickListener(view -> taskDetails(tasks.get(position)));
     }
 
@@ -63,6 +61,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         intent.putExtra("body", task.getBody());
         intent.putExtra("date", task.getCreated().toDate().toString());
         intent.putExtra("state", task.getState().toString());
+        intent.putExtra("team", task.getTeam().getName());
         callingActivity.startActivity(intent);
     }
 

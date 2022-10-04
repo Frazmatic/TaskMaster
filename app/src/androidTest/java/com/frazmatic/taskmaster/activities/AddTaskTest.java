@@ -42,7 +42,7 @@ public class AddTaskTest {
     @Test
     public void addTaskTest() {
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.buttonAddTask), withText("Add Task"),
+                allOf(withId(R.id.buttonAddTaskActivity), withText("Add Task"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -72,7 +72,7 @@ public class AddTaskTest {
         textInputEditText2.perform(replaceText("Example Description 1"), closeSoftKeyboard());
 
         ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.buttonAddTask), withText("Add Task"),
+                allOf(withId(R.id.buttonAddTaskActivity), withText("Add Task"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
