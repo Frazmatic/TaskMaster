@@ -3,7 +3,6 @@ package com.frazmatic.taskmaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,7 +24,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class AddTask extends AppCompatActivity {
-    public static final String add_tag = "AddTaskActivity";
     private int tasksAdded;
     private CompletableFuture<List<Team>> teamsFuture;
 
@@ -61,8 +59,8 @@ public class AddTask extends AppCompatActivity {
                         .build();
                 Amplify.API.mutate(
                         ModelMutation.create(newTask),
-                        success -> {Log.i(add_tag, "Task added via Amplify API"); taskAddSuccess(title, description);},
-                        failure -> Log.i(add_tag, "Amplify failed to add new Task:" + failure)
+                        success -> taskAddSuccess(title, description),
+                        failure -> {}
                 );
             }
         });
@@ -82,17 +80,13 @@ public class AddTask extends AppCompatActivity {
         Amplify.API.query(
             ModelQuery.list(Team.class),
             success -> {
-                Log.i(add_tag, "Loaded Teams from Amplify");
                 ArrayList<Team> teams = new ArrayList<>();
                 for (Team t : success.getData()){
                     teams.add(t);
                 }
                 teamsFuture.complete(teams);
             },
-            failure -> {
-                Log.i(add_tag,"Failed to Load Teams from Amplify: " + failure.getMessage());
-                teamsFuture.complete(null);
-            }
+            failure -> teamsFuture.complete(null)
         );
     }
 
@@ -113,11 +107,9 @@ public class AddTask extends AppCompatActivity {
         }
 
         Spinner teamSpinner = findViewById(R.id.spinnerAddTaskTeam);
-        runOnUiThread(() -> {
-            teamSpinner.setAdapter(new ArrayAdapter<>(
-                    this,
-                    android.R.layout.simple_spinner_item,
-                    names));
-        });
+        runOnUiThread(() -> teamSpinner.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                names)));
     }
 }

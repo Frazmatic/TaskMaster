@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,7 +23,6 @@ import java.util.concurrent.ExecutionException;
 public class Settings extends AppCompatActivity {
     private SharedPreferences settings;
     public static final String USERNAME_KEY = "userName";
-    public static final String settings_tag = "Settings Activity";
     public static final String TEAMNAME_KEY = "teamName";
     private CompletableFuture<List<Team>> teamsFuture;
 
@@ -62,17 +60,13 @@ public class Settings extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.list(Team.class),
                 success -> {
-                    Log.i(settings_tag, "Loaded Teams from Amplify");
                     ArrayList<Team> teams = new ArrayList<>();
                     for (Team t : success.getData()){
                         teams.add(t);
                     }
                     teamsFuture.complete(teams);
                 },
-                failure -> {
-                    Log.i(settings_tag,"Failed to Load Teams from Amplify: " + failure.getMessage());
-                    teamsFuture.complete(null);
-                }
+                failure -> teamsFuture.complete(null)
         );
     }
 
