@@ -2,9 +2,7 @@ package com.frazmatic.taskmaster.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +22,7 @@ public class TaskFragment extends Fragment {
     }
 
     public static TaskFragment newInstance(String param1, String param2) {
-        TaskFragment fragment = new TaskFragment();
-        return fragment;
+        return new TaskFragment();
     }
 
     @Override

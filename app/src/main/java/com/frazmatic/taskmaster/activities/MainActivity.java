@@ -8,15 +8,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
-import com.amplifyframework.datastore.generated.model.Team;
 import com.frazmatic.taskmaster.R;
 import com.frazmatic.taskmaster.adapters.TaskAdapter;
 
@@ -24,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String main_tag ="Main Activity";
     private SharedPreferences settings;
     private List<Task> tasks;
     private TaskAdapter adapter;
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Amplify.API.query(
             ModelQuery.list(Task.class),
             success -> {
-                Log.i(main_tag, "Loaded Tasks from Amplify");
+
                 tasks.clear();
                 for (Task t : success.getData()){
                     if (teamName.isEmpty() || t.getTeam().getName().equals(teamName)){
@@ -105,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 runOnUiThread(() -> adapter.notifyDataSetChanged());
             },
-            failure -> Log.i(main_tag,"Failed to Load task from Amplify: " + failure.getMessage())
+            failure -> {}
         );
     }
 }

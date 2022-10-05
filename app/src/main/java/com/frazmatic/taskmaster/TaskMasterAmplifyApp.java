@@ -10,7 +10,7 @@ import com.amplifyframework.core.Amplify;
 public class TaskMasterAmplifyApp extends Application {
     public static final String app_tag = "TaskMasterApp";
 
-        @Override
+    @Override
     public void onCreate() {
         super.onCreate();
         try {
