@@ -17,5 +17,11 @@
     <string name="hint_text_detailed_task_description">Detailed Task Description</string>
     <string name="text_detailed_task_description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
     <string name="button_settings_main">Settings</string>
+    <string name="button_sign_in">Log In</string>
+    <string name="text_email_hint">E-Mail:</string>
+    <string name="text_password_hint">Password:</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="text_confirmation">Verification Code (Check your e-mail)</string>
+    <string name="button_confirmation">Confirm Email Address</string>
 
 </resources>
