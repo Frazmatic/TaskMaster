@@ -8,15 +8,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.amazonaws.mobileconnectors.cognitoauth.Auth;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.frazmatic.taskmaster.R;
 import com.frazmatic.taskmaster.adapters.TaskAdapter;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         settings();
         tasks = new ArrayList<>();
         recyclerSetup();
+        setupLoginLogoutButton();
     }
 
     @Override
@@ -101,6 +111,43 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> adapter.notifyDataSetChanged());
             },
             failure -> {}
+        );
+    }
+
+    private void setupLoginLogoutButton(){
+        Button b = findViewById(R.id.buttonLoginLogout);
+        RecyclerView taskRecycler = findViewById(R.id.recyclerTasks);
+        Amplify.Auth.fetchAuthSession(
+                result -> {
+                    if (result.isSignedIn()){
+                        runOnUiThread(() -> {
+                            b.setText("Log Out");
+                            b.setOnClickListener(view -> {
+                                signOutUser();
+                                finish();
+                                startActivity(getIntent());
+                            });
+                            taskRecycler.setVisibility(View.VISIBLE);
+                        });
+                    } else {
+                        runOnUiThread(() -> {
+                            b.setText("Log In");
+                            b.setOnClickListener(view -> {
+                                Intent intent = new Intent(this, LogIn.class);
+                                startActivity(intent);
+                            });
+                            taskRecycler.setVisibility(View.GONE);
+                        });
+                    }
+                },
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
+    }
+
+    public void signOutUser(){
+        Amplify.Auth.signOut(
+                () -> Log.i("AuthSignOut", "Signed Out"),
+                failure -> Log.i("AuthSignOut", failure.toString())
         );
     }
 }

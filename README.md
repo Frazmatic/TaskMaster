@@ -2,6 +2,32 @@
 
 An app for tracking tasks and their completion.
 
+## 5 - 9 October 2099
+## Cognito 
+- LogIn Button:
+  - Changes to LogOut function if already logged in
+  - Recycler (tasks) hidden if not logged in
+  - goes to log in page if logged out
+- LogIn Activity:
+  - Email & Password elements
+  - gets authentication from AWS Cognito then return to main page
+- SignUp Activity:
+  - Linked from Log In page
+  - email & password
+  - Links to Confirmation Activity
+- Confirmation Activity:
+  - Takes confirmation code then returns to main
+  - refreshes if not valid
+  - TO DO: resend confirmation request from AWS
+
+![Hope Page - Not Logged In](./screenshots/homePageNotLoggedIn.jpg)
+![Log In](./screenshots/loginPage.jpg)
+![Home Page - Logged In](./screenshots/loggedIn.jpg)
+![Sign Up](./screenshots/signup.jpg)
+![Confirmation Page](./screenshots/confirmationPage.jpg)
+![Confirmation Failure](./screenshots/confirmationFailure.jpg)
+
+
 ## 4 October 2022
 ## Teams
 - Added Team entity with relationship to Task (Team has many tasks)
