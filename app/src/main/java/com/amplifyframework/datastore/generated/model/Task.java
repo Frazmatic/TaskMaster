@@ -32,12 +32,16 @@ public final class Task implements Model {
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
   public static final QueryField CREATED = field("Task", "created");
+  public static final QueryField LAT = field("Task", "lat");
+  public static final QueryField LON = field("Task", "lon");
   public static final QueryField TEAM = field("Task", "teamID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="TaskState") TaskState state;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime created;
+  private final @ModelField(targetType="Float") Double lat;
+  private final @ModelField(targetType="Float") Double lon;
   private final @ModelField(targetType="Team") @BelongsTo(targetName = "teamID", type = Team.class) Team team;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -61,6 +65,14 @@ public final class Task implements Model {
       return created;
   }
   
+  public Double getLat() {
+      return lat;
+  }
+  
+  public Double getLon() {
+      return lon;
+  }
+  
   public Team getTeam() {
       return team;
   }
@@ -73,12 +85,14 @@ public final class Task implements Model {
       return updatedAt;
   }
   
-  private Task(String id, String title, String body, TaskState state, Temporal.DateTime created, Team team) {
+  private Task(String id, String title, String body, TaskState state, Temporal.DateTime created, Double lat, Double lon, Team team) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
     this.created = created;
+    this.lat = lat;
+    this.lon = lon;
     this.team = team;
   }
   
@@ -95,6 +109,8 @@ public final class Task implements Model {
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getState(), task.getState()) &&
               ObjectsCompat.equals(getCreated(), task.getCreated()) &&
+              ObjectsCompat.equals(getLat(), task.getLat()) &&
+              ObjectsCompat.equals(getLon(), task.getLon()) &&
               ObjectsCompat.equals(getTeam(), task.getTeam()) &&
               ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
@@ -109,6 +125,8 @@ public final class Task implements Model {
       .append(getBody())
       .append(getState())
       .append(getCreated())
+      .append(getLat())
+      .append(getLon())
       .append(getTeam())
       .append(getCreatedAt())
       .append(getUpdatedAt())
@@ -125,6 +143,8 @@ public final class Task implements Model {
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
       .append("created=" + String.valueOf(getCreated()) + ", ")
+      .append("lat=" + String.valueOf(getLat()) + ", ")
+      .append("lon=" + String.valueOf(getLon()) + ", ")
       .append("team=" + String.valueOf(getTeam()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
@@ -151,6 +171,8 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -161,6 +183,8 @@ public final class Task implements Model {
       body,
       state,
       created,
+      lat,
+      lon,
       team);
   }
   public interface TitleStep {
@@ -174,6 +198,8 @@ public final class Task implements Model {
     BuildStep body(String body);
     BuildStep state(TaskState state);
     BuildStep created(Temporal.DateTime created);
+    BuildStep lat(Double lat);
+    BuildStep lon(Double lon);
     BuildStep team(Team team);
   }
   
@@ -184,6 +210,8 @@ public final class Task implements Model {
     private String body;
     private TaskState state;
     private Temporal.DateTime created;
+    private Double lat;
+    private Double lon;
     private Team team;
     @Override
      public Task build() {
@@ -195,6 +223,8 @@ public final class Task implements Model {
           body,
           state,
           created,
+          lat,
+          lon,
           team);
     }
     
@@ -224,6 +254,18 @@ public final class Task implements Model {
     }
     
     @Override
+     public BuildStep lat(Double lat) {
+        this.lat = lat;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lon(Double lon) {
+        this.lon = lon;
+        return this;
+    }
+    
+    @Override
      public BuildStep team(Team team) {
         this.team = team;
         return this;
@@ -241,12 +283,14 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, TaskState state, Temporal.DateTime created, Team team) {
+    private CopyOfBuilder(String id, String title, String body, TaskState state, Temporal.DateTime created, Double lat, Double lon, Team team) {
       super.id(id);
       super.title(title)
         .body(body)
         .state(state)
         .created(created)
+        .lat(lat)
+        .lon(lon)
         .team(team);
     }
     
@@ -268,6 +312,16 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder created(Temporal.DateTime created) {
       return (CopyOfBuilder) super.created(created);
+    }
+    
+    @Override
+     public CopyOfBuilder lat(Double lat) {
+      return (CopyOfBuilder) super.lat(lat);
+    }
+    
+    @Override
+     public CopyOfBuilder lon(Double lon) {
+      return (CopyOfBuilder) super.lon(lon);
     }
     
     @Override
