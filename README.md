@@ -41,7 +41,7 @@ An app for tracking tasks and their completion.
 ![Homepage](./screenshots/homepageV4a.jpg)
 ![Homepage 2](./screenshots/homepageV4b.jpg)
 ![Add Task](./screenshots/addtaskV2.jpg)
-![Settings](./)
+![Settinggs](./screenshots/settings.jpg)
 
 ## 1 October 2022
 ## DynamoDB & GraphQL

@@ -9,6 +9,8 @@ mutation CreateTask(
     body
     state
     created
+    lat
+    lon
     teamID
     team {
       id
@@ -33,6 +35,8 @@ mutation UpdateTask(
     body
     state
     created
+    lat
+    lon
     teamID
     team {
       id
@@ -57,6 +61,8 @@ mutation DeleteTask(
     body
     state
     created
+    lat
+    lon
     teamID
     team {
       id
@@ -85,6 +91,8 @@ mutation CreateTeam(
         body
         state
         created
+        lat
+        lon
         teamID
         createdAt
         updatedAt
@@ -109,6 +117,8 @@ mutation UpdateTeam(
         body
         state
         created
+        lat
+        lon
         teamID
         createdAt
         updatedAt
@@ -133,6 +143,8 @@ mutation DeleteTeam(
         body
         state
         created
+        lat
+        lon
         teamID
         createdAt
         updatedAt
